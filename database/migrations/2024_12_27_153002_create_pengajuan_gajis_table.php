@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('total_pengajuan');
             $table->string('file')->nullable();
             $table->string('id_daftar_gaji');
+            $table->integer('id_perusahaan');
             $table->boolean('status')->default(0); // 0 = inactive, 1 = active
             $table->timestamps();
         });

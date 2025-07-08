@@ -22,7 +22,14 @@
             
             <button type="submit">Login</button>
         </form>
+    
+        <div style="margin-top: 10px; text-align: center;">
+            <a href="{{ route('daftar.index') }}">
+                <button class="btn1" type="button">Register</button>
+            </a>
+        </div>
     </div>
+    
 </div>
 @endsection
 

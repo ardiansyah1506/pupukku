@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @yield('title')
+    <!-- Font Awesome 6 CDN -->
     <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     @auth
         <style>
             .popup {
@@ -134,6 +136,7 @@
             </form>
         </footer>
     @endauth
+   
     <script src="{{ asset('scripts/script.js') }}"></script>
     <script>
         const continueButton = document.getElementById('continueButton');

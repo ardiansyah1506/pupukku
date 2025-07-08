@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class LaporanController extends Controller
 {
     public function index(){
+        $id = Auth::user()->id_perusahaan;
         $data = LaporanPengiriman::select(
             'laporan_pengiriman.id AS id_laporan',
             'laporan_pengiriman.uang_makan',
@@ -26,6 +27,7 @@ class LaporanController extends Controller
         ->join('pekerjaan_aktif', 'laporan_pengiriman.id_pekerjaan', '=', 'pekerjaan_aktif.id')
         ->join('pekerjaan', 'pekerjaan_aktif.id_pekerjaan', '=', 'pekerjaan.id')
         ->join('users', 'users.id', '=', 'pekerjaan_aktif.id_user')
+        ->where('users.id_perusahaan',$id)
         ->paginate(5);
     
 
@@ -33,6 +35,7 @@ class LaporanController extends Controller
     }
 
     public function daftarKaryawan(){
+        $id = Auth::user()->id_perusahaan;
         $data = User::leftJoin('pekerjaan_aktif', 'pekerjaan_aktif.id_user', '=', 'users.id')
         ->select(
             'users.id',
@@ -40,6 +43,8 @@ class LaporanController extends Controller
             \DB::raw('MAX(pekerjaan_aktif.status) AS status'),
             \DB::raw('(SELECT id FROM pekerjaan_aktif WHERE pekerjaan_aktif.id_user = users.id AND pekerjaan_aktif.status = 1 LIMIT 1) AS pekerjaan_aktif_id')
         )
+        ->where('id_perusahaan',$id)
+        ->whereNotIn('users.role', ['admin', 'owner'])
         ->groupBy('users.id', 'users.username')
         ->paginate(5);
 

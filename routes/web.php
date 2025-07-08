@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DaftarPerusahaanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
@@ -19,6 +20,21 @@ Route::post('/register', [LoginController::class, 'register'])->name('register')
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+Route::group(['prefix' => '/daftar', 'as' => 'daftar.', 'controller' => DaftarPerusahaanController::class], function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/detil/{id}', 'detail')->name('detail');
+    Route::get('/create/{id}', 'create')->name('create');
+    Route::get('/admin/{id}', 'admin')->name('admin');
+    Route::post('/store', 'store')->name('store');
+    Route::post('/uploadBuktiBayar/{id}', 'uploadBuktiBayar')->name('uploadBuktiBayar');
+    Route::post('/konfirmasi/{id}', 'konfirmasi')->name('konfirmasi');
+});
+
+// Optional: Add this route for AJAX detail fetching
+Route::get('/daftar/detail/{id}', function($id) {
+    $perusahaan = \App\Models\DaftarPerusahaan::findOrFail($id);
+    return response()->json($perusahaan);
+})->name('daftar.detail.ajax');
 Route::middleware('auth')->group(function(){
     Route::group(['prefix' => '/riwayat-penarikan', 'as' => 'RiwayatPenarikan.', 'controller' => RiwayatPenarikanController::class], function () {
         Route::get('/', 'index')->name('index');
@@ -41,6 +57,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/ambil-pekerjaan', 'ambilPekerjaan')->name('ambilPekerjaan');
         Route::post('/store', 'store')->name('store');
     });
+
     Route::group(['prefix' => '/pekerjaan-aktif', 'as' => 'pekerjaanAktif.', 'controller' => PekerjaanAktifController::class], function () {
         Route::get('/', 'index')->name('index');
     });

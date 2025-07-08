@@ -16,7 +16,8 @@ class PekerjaanController extends Controller
 
     public function DaftarPekerjaanBaru()
     {
-        $data = Pekerjaan::where('status', 0)->get();
+        $id = Auth::user()->id_perusahaan;
+        $data = Pekerjaan::where('status', 0)->where('id_perusahaan', $id)->get();
         return view('karyawan.pekerjaan_baru.index', compact('data'));
     }
 
@@ -67,6 +68,7 @@ class PekerjaanController extends Controller
     
     public function store(Request $request)
     {
+        $id = Auth::user()->id_perusahaan;
         $request->validate([
             'kendaraan' => 'required|string|max:255',
             'no_pol' => 'required|string|max:255',
@@ -83,6 +85,7 @@ class PekerjaanController extends Controller
             'lokasi' => $request->lokasi,
             'tanggal' => $request->tanggal,
             'total_karung' => $request->total_karung,
+            'id_perusahaan' => $id,
             'created_at' => $request->tanggal, // Isi created_at dengan input tanggal
         ]);
 

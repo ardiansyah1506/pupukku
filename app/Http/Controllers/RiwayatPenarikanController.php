@@ -34,7 +34,8 @@ class RiwayatPenarikanController extends Controller
 
     public function DaftarGaji()
     {
-        $data = PengajuanGaji::paginate(5);
+        $id = Auth::user()->id_perusahaan;
+        $data = PengajuanGaji::paginate(5)->where('id_perusahaan',$id);
 
         return view('owner.daftar-gaji.index', compact('data'));
     }

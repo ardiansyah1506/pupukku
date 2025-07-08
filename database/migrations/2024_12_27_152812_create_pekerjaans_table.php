@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('lokasi');
             $table->integer('total_karung');
+            $table->integer('id_perusahaan');
             $table->boolean('status')->default(0); // 0 = inactive, 1 = active
             $table->timestamps();
         });

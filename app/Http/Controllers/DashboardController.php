@@ -40,9 +40,10 @@ class DashboardController extends Controller
         if ($data->total_gaji < $request->total_pengajuan) {
             return redirect()->route('dashboard.index')->with('warning', 'Jumlah tidak valid atau melebihi saldo!.');
         }
+        $id = Auth::user()->id_perusahaan;
 
         // Simpan data ke database dengan transaksi
-        DB::transaction(function () use ($request, $data) {
+        DB::transaction(function () use ($request, $data, $id) {
             // Insert data pengajuan gaji
             PengajuanGaji::create([
                 'bank' => $request->bank,
@@ -50,6 +51,7 @@ class DashboardController extends Controller
                 'nama' => $request->nama,
                 'total_pengajuan' => $request->total_pengajuan,
                 'id_daftar_gaji' => $data->id,
+                'id_perusahaan' => $id,
             ]);
 
             // Kurangi total_gaji pada DaftarGaji

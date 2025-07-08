@@ -18,6 +18,15 @@ body, html {
     background-color: #FFFFFF;
 }
 
+.daftar-container{
+    display: flex;
+    justify-content:space-between;
+    padding: 20px 100px 0px 100px;
+}
+.keterangan-daftar{
+font-weight: 400;
+color: #333;
+}
 /* Gambar ilustrasi */
 .login-image {
     width: 546px;
@@ -71,6 +80,16 @@ body, html {
     background-color: #7B2CBF;
     color: white;
     border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+.login-form .btn1 {
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+    color: #7B2CBF;
+    border: 1px solid #7B2CBF;
     border-radius: 5px;
     font-size: 1em;
     cursor: pointer;

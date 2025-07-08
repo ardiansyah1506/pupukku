@@ -39,7 +39,10 @@
                     @endforeach
                 </tbody>
             </table>
+            @if ($data->count())
             @include('partials.paginate')
+        @endif
+        
         </main>
     </div>
 
