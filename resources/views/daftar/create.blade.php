@@ -235,7 +235,10 @@
             background: #5a6fd8;
             transform: translateY(-2px);
         }
-
+        small{
+         font-size: 20px;
+         font-weight: lighter;   
+        }
         .close-btn {
             position: absolute;
             top: 15px;
@@ -278,8 +281,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="amount">Rp. 500.000</div>
-        
+        <div class="amount">
+            <p>Rp. 500.000</p>
+            <small>No Rekening: 1892323232</small>
+        </div>
         <div class="bank-selection-container">
             <div class="bank-option" onclick="selectBank('BCA', 'BCA')">
                 <div class="bank-logo bank-bca">BCA</div>
